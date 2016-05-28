@@ -1,0 +1,13 @@
+{% extends "web/base.html" %}
+
+{%  block title %} Home {% endblock %}
+
+{% block content %}
+
+    <form action="{% url 'authorize' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Sign In using GitHub">
+    </form>
+    {{ error | default:"" }}
+
+{% endblock %}

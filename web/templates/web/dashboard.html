@@ -1,0 +1,20 @@
+{% extends "web/base.html" %}
+
+{%  block title %} Dashboard {% endblock %}
+
+{% block content %}
+
+    <a href="{% url 'logout' %}">
+        <span>logout</span>
+    </a>
+
+    <form action="{% url 'pull_request' %}" method="get">
+        {% csrf_token %}
+        <label>Search pull requests from edx-platform repository</label>
+        <input type="text" name="pull_request_number" placeholder="Enter PR #" />
+        <input type="submit" value="Get information" />
+    </form>
+
+    {{ error | default:"" }}
+
+{% endblock %}

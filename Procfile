@@ -1,0 +1,1 @@
+web: gunicorn gitcodereview.wsgi --log-file -

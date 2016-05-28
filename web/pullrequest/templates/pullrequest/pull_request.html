@@ -1,0 +1,32 @@
+{% extends "web/base.html" %}
+
+{%  block title %} Pull Request {% endblock %}
+
+{% block content %}
+
+    <a href="{% url 'dashboard' %}">
+        <span> Back to dashboard </span>
+    </a>
+
+    <br/>
+    {% for pr_number, data  in pr_data.items %}
+        <h1>#{{ pr_number }}</h1>
+        <h2> Title – {{ data.title }} </h2>
+        Pull Request Owner – {{ data.owner }}<br/>
+        Created at – {{ data.created_at }}<br/>
+        Updated at – {{ data.updated_at }}<br/>
+        <h3>Reviewers:</h3>
+        {% for reviewer_name, data in data.reviewers.items %}
+            <h4>{{ reviewer_name }}</h4>
+            Tagged at – {{ data.tagged_at }}<br/>
+            First response on – {{ data.responded_at }}<br/>
+            Gave thumbs up at – {{ data.gave_thumbs_up_at }}<br/>
+        {% endfor %}
+    {% endfor %}
+
+    <h3>Overall Mentions:</h3>
+    {% for mention in mentions %}
+        {{ mention }}<br/>
+    {% endfor %}
+
+{% endblock %}
