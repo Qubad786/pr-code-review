@@ -42,6 +42,12 @@ def get_reviewers(mentions, pull_request_body, issue_comments, review_comments):
                 and reviewers_mapping[comment.user.login]['responded_at'] is None:
             reviewers_mapping[comment.user.login]['responded_at'] = comment.created_at
 
+        # TODO: Scrap the time when the PR's body was updated.
+        # Story behind: Mostly, people just create the PR and update their body with description and reviewers
+        # once the PR is ready for the review. Unfortunately, github v3 api dont have end point for knowing the
+        # time when the PR's body was updated. So, most likely, we will not get precise 'tagged_at' attribute
+        # for the reviewers that are in PR's body.
+
         # Look for time when each of reviewer was tagged, this should be
         # searched in pull request body and issue comments.
         for login in reviewers_mapping.keys():
