@@ -16,7 +16,6 @@ DEBUG = os.environ.get('DEBUG', True)
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -94,25 +93,24 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Use developer's overrides if environment variables are not set.
-if os.path.isfile(join(dirname(abspath(__file__)), 'private.py')):
-    from private import *
-
 # Secret key used in production secret.
-SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
+SECRET_KEY = os.environ.get('SECRET_KEY', 'secret_key')
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL)
+    'default': dj_database_url.config()
 }
 
 # Github Oauth settings
 OAUTH_SETTINGS = {
-    'CLIENT_ID': os.environ.get('CLIENT_ID', CLIENT_ID),
-    'CLIENT_SECRET': os.environ.get('CLIENT_SECRET', CLIENT_SECRET),
-    'BASE_URL': os.environ.get('BASE_URL', BASE_URL),
-    'ACCESS_TOKEN_URL': os.environ.get('ACCESS_TOKEN_URL', ACCESS_TOKEN_URL),
-    'REDIRECT_URL': os.environ.get('REDIRECT_URL', REDIRECT_URL),
+    'CLIENT_ID': os.environ.get('CLIENT_ID', None),
+    'CLIENT_SECRET': os.environ.get('CLIENT_SECRET', None),
+    'BASE_URL': os.environ.get('BASE_URL', None),
+    'ACCESS_TOKEN_URL': os.environ.get('ACCESS_TOKEN_URL', None),
+    'REDIRECT_URL': os.environ.get('REDIRECT_URL', None),
 }
+
+# Use developer's overrides if environment variables are not set.
+if os.path.isfile(join(dirname(abspath(__file__)), 'private.py')):
+    from private import *
