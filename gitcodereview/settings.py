@@ -4,6 +4,8 @@ Django settings for gitcodereview project.
 
 import os
 from os.path import abspath, dirname, join
+
+import dj_database_url
 from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -103,14 +105,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', DB_NAME),
-        'USER': os.environ.get('DB_USER', DB_USER),
-        'PASSWORD': os.environ.get('DB_PASSWORD', DB_PASSWORD),
-        'HOST': os.environ.get('DB_HOST', DB_HOST),
-        'PORT': os.environ.get('DB_PORT', DB_PORT),
-    }
+    'default': dj_database_url.config(default=DATABASE_URL)
 }
 
 # Github Oauth settings
